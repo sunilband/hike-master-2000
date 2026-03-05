@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
-import { DM_Sans, DM_Mono } from 'next/font/google';
+import { Rubik, DM_Mono } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
-const dmSans = DM_Sans({
+const rubik = Rubik({
   variable: '--font-sans',
   subsets: ['latin'],
   display: 'swap',
@@ -30,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${dmSans.variable} ${dmMono.variable} font-sans antialiased`}
+        className={`${rubik.variable} ${dmMono.variable} font-sans antialiased`}
       >
         <ThemeProvider
           attribute="class"
