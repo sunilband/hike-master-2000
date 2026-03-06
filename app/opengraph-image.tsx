@@ -15,36 +15,98 @@ export default async function Image() {
   const data = await fetchData();
   const description = `${data.role}${data.team ? ` | ${data.team}` : ''}`;
 
+  const initials = data.name
+    .split(' ')
+    .filter(Boolean)
+    .map((n) => n[0])
+    .join('')
+    .substring(0, 2)
+    .toUpperCase();
+
   return new ImageResponse(
     <div
       style={{
         display: 'flex',
         height: '100%',
         width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
+        backgroundColor: '#f8fafc',
         flexDirection: 'column',
-        backgroundColor: '#09090b',
-        color: '#ffffff',
-        letterSpacing: '-.02em',
-        fontWeight: 700,
       }}
     >
-      <div style={{ display: 'flex', fontSize: 130, marginBottom: '20px' }}>
-        {data.name}
-      </div>
-      <div style={{ display: 'flex', fontSize: 60, color: '#a1a1aa' }}>
-        {description}
+      <div
+        style={{
+          display: 'flex',
+          flex: 1,
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          paddingBottom: '20px',
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: 160,
+            height: 160,
+            borderRadius: 80,
+            backgroundColor: '#0f172a',
+            color: '#ffffff',
+            fontSize: 70,
+            fontWeight: 700,
+            letterSpacing: '0.05em',
+            marginBottom: '60px',
+            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+          }}
+        >
+          {initials}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            fontSize: 80,
+            fontWeight: 700,
+            color: '#0f172a',
+            letterSpacing: '0.15em',
+            textTransform: 'uppercase',
+            marginBottom: '30px',
+          }}
+        >
+          {data.name}
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            fontSize: 36,
+            color: '#475569',
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+          }}
+        >
+          {description}
+        </div>
       </div>
       <div
         style={{
           display: 'flex',
-          fontSize: 40,
-          marginTop: '40px',
-          color: '#3b82f6',
+          height: '140px',
+          width: '100%',
+          backgroundColor: '#0f172a',
+          alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        Brag Dashboard
+        <div
+          style={{
+            color: '#94a3b8',
+            fontSize: 24,
+            letterSpacing: '0.3em',
+            textTransform: 'uppercase',
+          }}
+        >
+          Advergame Technologies Private Limited
+        </div>
       </div>
     </div>,
     {
