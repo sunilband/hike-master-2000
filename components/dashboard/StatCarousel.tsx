@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import Autoplay from 'embla-carousel-autoplay';
 import { Card, CardContent } from '@/components/ui/card';
@@ -33,6 +33,31 @@ export function StatCarousel({
   const [emblaRef, emblaApi] = useEmblaCarousel(
     { loop: true, align: 'start', slidesToScroll: 1 },
     [autoplay.current],
+  );
+
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([]);
+
+  const onInit = useCallback((api: any) => {
+    setScrollSnaps(api.scrollSnapList());
+  }, []);
+
+  const onSelect = useCallback((api: any) => {
+    setSelectedIndex(api.selectedScrollSnap());
+  }, []);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onInit(emblaApi);
+    onSelect(emblaApi);
+    emblaApi.on('reInit', onInit);
+    emblaApi.on('reInit', onSelect);
+    emblaApi.on('select', onSelect);
+  }, [emblaApi, onInit, onSelect]);
+
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi],
   );
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
@@ -78,21 +103,10 @@ export function StatCarousel({
   ];
 
   return (
-    <div className="relative mb-6 group">
-      {/* Prev button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1 z-10 h-7 w-7 rounded-full bg-card/80 backdrop-blur border border-border shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-        onClick={scrollPrev}
-        aria-label="Previous"
-      >
-        <ChevronLeft className="h-3.5 w-3.5" />
-      </Button>
-
+    <div className="relative mb-6">
       {/* Viewport */}
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex py-1 -ml-3">
+      <div className="overflow-hidden -mx-2 px-2 -my-2 py-2" ref={emblaRef}>
+        <div className="flex -ml-3">
           {slides.map(({ icon, label, value, accent }) => (
             <div key={label} className="flex-none pl-3 w-1/2 sm:w-1/4">
               <Card className="border-border/60 hover:border-border transition-colors h-full">
@@ -120,16 +134,43 @@ export function StatCarousel({
         </div>
       </div>
 
-      {/* Next button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1 z-10 h-7 w-7 rounded-full bg-card/80 backdrop-blur border border-border shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
-        onClick={scrollNext}
-        aria-label="Next"
-      >
-        <ChevronRight className="h-3.5 w-3.5" />
-      </Button>
+      {/* Controls: Arrows and Dots */}
+      <div className="flex items-center justify-between mt-4 px-1">
+        <div className="flex items-center gap-2.5">
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 rounded-full bg-transparent border-muted-foreground/30 hover:bg-accent/50"
+            onClick={scrollPrev}
+            aria-label="Previous"
+          >
+            <ChevronLeft className="h-4 w-4 text-muted-foreground" />
+          </Button>
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 rounded-full bg-transparent border-muted-foreground/30 hover:bg-accent/50"
+            onClick={scrollNext}
+            aria-label="Next"
+          >
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </Button>
+        </div>
+        <div className="flex items-center gap-2">
+          {scrollSnaps.map((_, index) => (
+            <button
+              key={index}
+              className={`rounded-full transition-all ${
+                index === selectedIndex
+                  ? 'h-[10px] w-[10px] border-[1.5px] border-foreground bg-transparent'
+                  : 'h-2 w-2 border border-muted-foreground/40 bg-transparent'
+              }`}
+              onClick={() => scrollTo(index)}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

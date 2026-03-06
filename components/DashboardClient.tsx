@@ -86,7 +86,7 @@ export function DashboardClient({ data }: DashboardClientProps) {
             onValueChange={setActiveTab}
             className="space-y-6"
           >
-            <TabsList className="!h-auto bg-muted p-1.5 gap-1.5 flex flex-wrap justify-start rounded-xl mb-4 sm:mb-8">
+            <TabsList className="!h-auto bg-muted p-1.5 gap-1.5 flex flex-wrap justify-start rounded-xl mb-2 sm:mb-4">
               {tabs.map((tab) => (
                 <TabsTrigger
                   key={tab.id}

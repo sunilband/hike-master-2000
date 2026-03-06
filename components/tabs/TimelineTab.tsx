@@ -101,12 +101,12 @@ export function TimelineTab({ achievements }: TimelineTabProps) {
             const impactCfg = getImpactConfig(achievement.impact);
             const catColor = getCategoryColor(achievement.category);
             return (
-              <div key={achievement.id} className="relative sm:pl-10">
+              <div key={achievement.id} className="relative sm:pl-10 group">
                 {/* Dot */}
-                <div className="absolute left-1.5 top-5 w-4 h-4 rounded-full bg-card border-2 border-primary hidden sm:block" />
+                <div className="absolute left-1.5 top-5 w-4 h-4 rounded-full bg-card border-2 border-primary hidden sm:block transition-colors duration-200 group-hover:bg-primary" />
 
                 <Link href={`/achievements/${achievement.id}`}>
-                  <Card className="border-border/60 hover:border-primary/50 hover:shadow-md transition-all duration-200 cursor-pointer group">
+                  <Card className="border-border/60 group-hover:border-primary/50 group-hover:shadow-md transition-all duration-200 cursor-pointer">
                     <CardContent className="pt-4 pb-4 px-5">
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0 space-y-2 flex-1">
