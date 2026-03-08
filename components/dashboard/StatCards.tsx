@@ -10,7 +10,7 @@ const STAT_ITEMS: Array<{
   label: string;
   icon: string;
 }> = [
-  { key: 'projectsShipped', label: 'Projects Shipped', icon: '🚀' },
+  { key: 'numberOfRelease', label: 'No. of Releases', icon: '🚀' },
   { key: 'prsReviewed', label: 'PRs Reviewed', icon: '🔍' },
   { key: 'prsMerged', label: 'PRs Merged', icon: '✅' },
   { key: 'techDiscussions', label: 'Tech Discussions', icon: '💬' },
