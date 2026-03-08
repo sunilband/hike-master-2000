@@ -4,6 +4,7 @@ export type ImpactLevel = 'high' | 'medium' | 'low';
 export type MiscStatus = 'in-progress' | 'upcoming' | 'planned' | 'completed';
 export type MiscType = 'learning' | 'upcoming' | 'goal' | 'personal' | 'other';
 export type ChartType = 'line' | 'bar' | 'before-after';
+export type FeatureType = 'OPS' | 'IRQ' | 'SAP' | 'TPRM';
 
 export interface CodeActivity {
   date: string; // "YYYY-MM-DD"
@@ -44,6 +45,7 @@ export interface AchievementTestimonial {
 export interface Achievement {
   id: string;
   title: string;
+  featureType?: FeatureType;
   category: string;
   impact: ImpactLevel;
   date?: string;
@@ -54,6 +56,7 @@ export interface Achievement {
   chart?: AchievementChart;
   supportingDocs?: SupportingDoc[];
   testimonials?: AchievementTestimonial[];
+  beforeAfterImages?: { before: string; after: string };
 }
 
 export type SkillCategory = 'improved' | 'new';
@@ -108,7 +111,7 @@ export interface MiscItem {
 }
 
 export interface ProfileMetrics {
-  projectsShipped: number | string;
+  numberOfRelease: number | string;
   prsReviewed: number | string;
   prsMerged: number | string;
   techDiscussions: number | string;
@@ -137,7 +140,7 @@ export const BRAG_DATA: BragData = {
   period: 'July 2024 – Current',
   years: ['2026', '2025', '2024'],
   metrics: {
-    projectsShipped: 12,
+    numberOfRelease: 5,
     prsReviewed: 134,
     prsMerged: 89,
     techDiscussions: 28,
@@ -145,203 +148,237 @@ export const BRAG_DATA: BragData = {
   achievements: [
     {
       id: '1',
-      title: 'Improved API response time from 4s to 300ms',
-      category: 'Performance',
+      title:
+        'Prod Bug: Incorrect Data Displayed in Supplier Profile Sections Across MUs',
+      category: 'Bug Fix',
       impact: 'high',
-      date: '2024-02',
-      metric: '~93% faster',
+      date: '2026-03',
+      metric: 'Prevented erroneous third-party system integration triggers',
       description:
-        'Profiled and rewrote the core data-fetch layer, added Redis caching, and eliminated N+1 queries across 3 critical endpoints. The change unblocked the mobile team who had been dealing with timeout errors for months.',
-      tickets: [
-        {
-          label: 'PERF-1204',
-          url: 'https://linear.app/example/issue/PERF-1204',
-        },
-        {
-          label: 'PERF-1210',
-          url: 'https://linear.app/example/issue/PERF-1210',
-        },
-      ],
-      prs: [
-        { label: '#891', url: 'https://github.com/example/repo/pull/891' },
-        { label: '#904', url: 'https://github.com/example/repo/pull/904' },
-      ],
-      chart: {
-        type: 'before-after',
-        title: 'API Response Time by Endpoint',
-        unit: 'ms',
-        beforeLabel: 'Before (Jan 2024)',
-        afterLabel: 'After (Feb 2024)',
-        data: [
-          { label: '/api/feed', value: 3800 },
-          { label: '/api/feed', value: 210 },
-          { label: '/api/user/stats', value: 4200 },
-          { label: '/api/user/stats', value: 280 },
-          { label: '/api/search', value: 5100 },
-          { label: '/api/search', value: 340 },
-        ],
-      },
-      supportingDocs: [
-        {
-          id: 'd1',
-          title: 'Performance Audit Report',
-          url: 'https://example.com/perf-report',
-          type: 'report',
-        },
-        {
-          id: 'd2',
-          title: 'Architecture Decision Record',
-          url: 'https://example.com/adr',
-          type: 'doc',
-        },
-      ],
-      testimonials: [
-        {
-          id: 'at1',
-          name: 'Priya Sharma',
-          designation: 'Engineering Manager',
-          image: 'https://i.pravatar.cc/80?img=47',
-          comment:
-            'This single change unblocked our mobile team who had been dealing with timeout errors for months. Exceptional root-cause analysis and clean execution.',
-        },
-      ],
+        'Identified and resolved a production issue where irrelevant data sections were being rendered on supplier profiles across multiple market units and countries. The incorrect display was causing unintended downstream integration events in the ERP system. Conducted a cross-MU audit to validate field visibility rules and ensure consistent behavior across all regions.',
     },
     {
       id: '2',
-      title: 'Led design system migration across 3 squads',
-      category: 'Leadership',
-      impact: 'high',
-      date: '2024-04',
-      metric: '3 teams unblocked',
+      title:
+        'Infrastructure: Base Container Image Update on Non-Production Environments',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2026-02',
+      metric: 'Kept dev/test environments up-to-date and secure',
       description:
-        'Drove adoption of the new Radix-based component library across Growth, Checkout, and Onboarding squads. Reduced UI inconsistencies by 80% and cut per-squad component duplication significantly.',
-      tickets: [
-        { label: 'DS-330', url: 'https://linear.app/example/issue/DS-330' },
-      ],
-      prs: [
-        { label: '#712', url: 'https://github.com/example/repo/pull/712' },
-        { label: '#750', url: 'https://github.com/example/repo/pull/750' },
-      ],
-      chart: {
-        type: 'bar',
-        title: 'Components Migrated per Squad',
-        unit: 'components',
-        data: [
-          { label: 'Growth', value: 34 },
-          { label: 'Checkout', value: 28 },
-          { label: 'Onboarding', value: 21 },
-        ],
-      },
-      supportingDocs: [],
-      testimonials: [
-        {
-          id: 'at2',
-          name: 'Jordan Lee',
-          designation: 'Staff Engineer',
-          image: 'https://i.pravatar.cc/80?img=12',
-          comment:
-            'Alex ran the migration playbook with zero drama. Clear docs, patient pairing sessions, and a smooth rollout across every squad.',
-        },
-      ],
+        'Updated the base container image across test and development environments as part of regular maintenance. Resolved outstanding environment stability issues. Ensured continuity of CI/CD pipelines post-update.',
     },
     {
       id: '3',
-      title: 'Shipped full accessibility audit and remediation',
-      category: 'Quality',
-      impact: 'medium',
-      date: '2024-06',
-      metric: 'WCAG AA compliant',
+      title: 'Dependency Upgrade: Core Notification & Email Library Packages',
+      category: 'User Story',
+      impact: 'high',
+      date: '2026-01',
+      metric: 'Resolved known vulnerabilities and compatibility issues',
       description:
-        'Fixed 47 a11y violations across the product and added automated axe-core checks into the CI pipeline to prevent regressions.',
-      tickets: [
-        { label: 'A11Y-55', url: 'https://linear.app/example/issue/A11Y-55' },
-        { label: 'A11Y-61', url: 'https://linear.app/example/issue/A11Y-61' },
-      ],
-      prs: [{ label: '#834', url: 'https://github.com/example/repo/pull/834' }],
-      chart: {
-        type: 'bar',
-        title: 'Violations Fixed by Type',
-        unit: 'issues',
-        data: [
-          { label: 'Color Contrast', value: 18 },
-          { label: 'ARIA Labels', value: 12 },
-          { label: 'Focus Traps', value: 9 },
-          { label: 'Alt Text', value: 8 },
-        ],
-      },
-      supportingDocs: [
+        'Upgraded key third-party packages related to email and notification services (nodemailer, SES client) to their latest stable versions. Ensured backward compatibility and ran regression tests to validate existing notification flows remained unaffected.',
+      testimonials: [
         {
-          id: 'd3',
-          title: 'a11y Audit Figma File',
-          url: 'https://example.com/figma',
-          type: 'design',
+          id: 'at1',
+          name: 'Sanjana Vaswani',
+          designation: 'Custom Software Engineering Specialist',
+          comment:
+            'This change done by other developer which did not work. You managed to resolve the issue near the SCA deadline is highly appreciated.',
         },
       ],
-      testimonials: [],
     },
     {
       id: '4',
-      title: 'Mentored 2 junior engineers to promotion',
-      category: 'Mentorship',
+      title:
+        'Supplier Form: Added Supplier Profile Question & Status Hold Functionality',
+      category: 'User Story',
       impact: 'medium',
-      date: '2024-08',
-      metric: '2 promotions',
+      date: '2026-01',
+      metric: 'Extended IRQ workflow with new compliance controls',
       description:
-        'Ran structured weekly 1:1s, detailed code reviews with written feedback, and career coaching sessions across 6 months for two junior engineers, both of whom were promoted at the next cycle.',
-      tickets: [],
-      prs: [],
-      supportingDocs: [],
-      testimonials: [
-        {
-          id: 'at3',
-          name: 'Maria Chen',
-          designation: 'Product Manager',
-          image: 'https://i.pravatar.cc/80?img=23',
-          comment:
-            'Alex took real ownership of growing the junior members of our team. Both engineers have noticeably levelled up in confidence and output.',
-        },
-      ],
+        "Implemented new question entries on the supplier profile form within the IRQ module. Added a 'Hold' status capability on the supplier profile to support compliance review workflows. Changes were coordinated with the relevant domain team to align with questionnaire versioning.",
     },
     {
       id: '5',
-      title: 'Launched real-time analytics dashboard',
-      category: 'Delivery',
-      impact: 'high',
-      date: '2024-10',
-      metric: '10k DAU at launch',
+      title:
+        'Supplier Form: Trade Compliance Section & Duplicate Request Bug Fix',
+      category: 'Bug Fix',
+      impact: 'medium',
+      date: '2025-12',
+      metric:
+        'Eliminated duplicate workflow triggers; added compliance selection UI',
       description:
-        'Delivered a 6-week project on time with zero post-launch P0 bugs. Used WebSockets for live data and React Query for optimistic updates.',
-      tickets: [
-        { label: 'DASH-100', url: 'https://linear.app/example/issue/DASH-100' },
-        { label: 'DASH-145', url: 'https://linear.app/example/issue/DASH-145' },
-      ],
-      prs: [
-        { label: '#960', url: 'https://github.com/example/repo/pull/960' },
-        { label: '#975', url: 'https://github.com/example/repo/pull/975' },
-      ],
-      chart: {
-        type: 'line',
-        title: 'Daily Active Users — First 30 Days',
-        unit: 'users',
-        data: [
-          { label: 'Day 1', value: 340 },
-          { label: 'Day 5', value: 1200 },
-          { label: 'Day 10', value: 3800 },
-          { label: 'Day 15', value: 6500 },
-          { label: 'Day 20', value: 8200 },
-          { label: 'Day 25', value: 9400 },
-          { label: 'Day 30', value: 10100 },
-        ],
+        'Added a new trade compliance selection field on the supplier profile form in the IRQ module. Simultaneously resolved a production bug where duplicate approval requests were being generated after a specific workflow stage, causing incorrect status propagation. Root cause was traced to an event handling issue in the approval flow.',
+    },
+    {
+      id: '6',
+      title:
+        'SAP Integration: Supplier Master Data Field Mapping for Regional MUs',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-12',
+      metric: 'Extended SAP field mapping coverage to new regions',
+      description:
+        'Implemented SAP integration field mappings for additional regional market units, covering supplier master data fields including name, address, search term, and bank account holder name. Ensured data from the supplier hub was correctly transformed and synced with the ERP system for the newly onboarded regions.',
+    },
+    {
+      id: '7',
+      title:
+        'TPRM: New API Design for IRQ Payload Validation & Auto-Correction (Implementation)',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-11',
+      metric: 'Automated IRQ payload correction, reducing manual intervention',
+      description:
+        'Implemented a new internal API endpoint designed to validate incoming IRQ payloads and apply auto-correction logic before processing.',
+    },
+    {
+      id: '8',
+      title: 'TPRM: API Design Analysis for IRQ Payload Validation',
+      category: 'Tech Story',
+      impact: 'medium',
+      date: '2025-11',
+      metric: 'Unblocked IRQ pipeline',
+      description:
+        'Conducted technical analysis and designed the architecture for a new API to handle IRQ payload validation and auto-correction.',
+    },
+    {
+      id: '9',
+      title: 'TPRM: Management Level Value Standardization in Database',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-10',
+      metric:
+        'Ensured consistent numeric management level storage across risk assessment modes',
+      description:
+        'Implemented backend logic to correctly set and persist management level values in the database mapped to their respective risk assessment modes.',
+    },
+    {
+      id: '10',
+      title: 'TPRM Dashboard: RAI Rating Column Added to IRQ Section',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-10',
+      metric: 'Improved risk visibility for assessment reviewers',
+      description:
+        'Added a new RAI (Risk Assessment Indicator) rating column to the IRQ section of the TPRM dashboard.',
+    },
+    {
+      id: '11',
+      title:
+        'TPRM: Risk Rating DB Integration & IRQ Questionnaire Answer Option Update',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-10',
+      metric:
+        'Enabled accurate risk data persistence; updated questionnaire answer options',
+      description:
+        'Implemented database-level changes to store and associate RAI risk ratings with supplier assessment records.',
+    },
+    {
+      id: '12',
+      title: 'IRQ: Event Queue Bug Fixes for Score Sync in Report',
+      category: 'Bug Fix',
+      impact: 'high',
+      date: '2025-09',
+      metric: 'Restored score update reliability',
+      description:
+        'Resolved event queue issues causing score updates to fail. This functionality was not implemented and hence it was not working. Completed implementation in bug itself without creating a separate User Story',
+    },
+    {
+      id: '13',
+      title:
+        'SAP Integration: Payment Terms & Multi-Bank Field Mapping for Regional MUs',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-09',
+      metric:
+        'Extended payment and banking integration coverage to 8+ regional MUs',
+      description:
+        'Implemented SAP integration logic for payment terms mapping and multi-bank handling across regional market units.',
+    },
+    {
+      id: '14',
+      title:
+        'SAP Integration: Bank Key Lookup via Reference Data for Regional MUs',
+      category: 'User Story',
+      impact: 'medium',
+      date: '2025-08',
+      metric:
+        'Automated bank key resolution for 2 regional MUs using lookup tables',
+      description:
+        'Implemented bank key field mapping using an Excel-based reference lookup dataset.',
+    },
+    {
+      id: '15',
+      title:
+        'SAP Integration: Category-Based Payment Terms Logic with Regional Exceptions',
+      category: 'User Story',
+      impact: 'high',
+      date: '2025-08',
+      metric: 'Handled 8+ regional exception rules for payment term assignment',
+      description:
+        'Implemented region-specific payment terms logic where assignment depends on supplier category and sub-category.',
+    },
+    {
+      id: '16',
+      title:
+        'Supplier Onboarding: Legacy Workflow Re-enablement for Migrated Suppliers',
+      category: 'User Story',
+      impact: 'high',
+      date: '2025-07',
+      metric:
+        'Restored correct onboarding flow for post-migration supplier cohort',
+      description:
+        'Implemented logic to re-enable the legacy onboarding workflow for suppliers migrated after a major platform release.',
+    },
+    {
+      id: '17',
+      title:
+        'SAP Integration: Tax ID Parsing, Address Field Validation & Frontend Wave Rollout',
+      category: 'User Story',
+      impact: 'high',
+      date: '2025-07',
+      metric:
+        'Covered 3 integration stories across tax, address, and frontend enablement',
+      description:
+        'Implemented tax ID parsing, address validation rules, and enabled ERP integration actions for new countries in the frontend.',
+    },
+    {
+      id: '18',
+      title:
+        'Async Flow Fix: Duplicate Request Generation After Approval Stage',
+      category: 'Bug Fix',
+      impact: 'high',
+      date: '2025-12',
+      metric:
+        'Eliminated duplicate downstream requests caused by missing async handliing',
+      description:
+        'Resolved a production and hotfix bug where duplicate downstream requests were being generated following a successful approval action, resulting in incorrect propagation on the affected records. Root cause analysis identified a missing `await` keyword in an asynchronous function call, causing the execution flow to proceed before the prior operation completed - triggering the downstream action twice. Fix wasapplied and validated across production, hotfix, and staging environments.',
+    },
+    {
+      id: '19',
+      title:
+        'Advanced Search Filter Fixes: Data Fetch & Response Time Optimisation',
+      category: 'Bug Fix',
+      impact: 'high',
+      date: '2025-11',
+      metric: 'Response time reduced from ~6 mins to ~3 secs (~99% faster)',
+      description:
+        'Resolved two bugs in the advanced search module. First, supplier data was not rendering when multiple filters (region, company code, and category) were applied simultaneously — traced to an incorrect query condition that excluded valid records when combined filters were used. Second, a specific risk-scoring filter was not being fetched correctly in the advanced search field, returning stale or empty results. Both fixes involved correcting the underlying data-fetch and filter-chaining logic. Post-fix, the combined advanced search response time dropped from approximately 6 minutes to under 3 seconds — a ~99% improvement.',
+      beforeAfterImages: {
+        before: '/anagha/bugs/advanced-search-api-optimization-before.jpeg',
+        after: '/anagha/bugs/advanced-search-api-optimization-after.jpeg',
       },
-      supportingDocs: [
-        {
-          id: 'd4',
-          title: 'Launch Demo Recording',
-          url: 'https://example.com/recording',
-          type: 'recording',
-        },
-      ],
-      testimonials: [],
+    },
+    {
+      id: '20',
+      title: 'IRQ: Notification Email Template Update',
+      category: 'Bug Fix',
+      impact: 'low',
+      date: '2025-09',
+      metric: 'Fixed notification formatting',
+      description: 'Corrected email template formatting.',
     },
   ],
   skills: [
@@ -531,7 +568,7 @@ export const BRAG_DATA: BragData = {
       icon: '🦀',
     },
     {
-      id: 'm5',
+      id: 'm6',
       type: 'learning',
       title: 'Udacity Full Stack JavaScript Developer Nanodegree Program',
       status: 'in-progress',

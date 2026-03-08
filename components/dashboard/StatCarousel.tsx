@@ -66,8 +66,8 @@ export function StatCarousel({
   const slides: SlideConfig[] = [
     {
       icon: '🚀',
-      label: 'Projects Shipped',
-      value: metrics.projectsShipped,
+      label: 'No. of Releases',
+      value: metrics.numberOfRelease,
       accent: 'var(--chart-1)',
     },
     {

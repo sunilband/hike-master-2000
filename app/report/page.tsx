@@ -50,10 +50,10 @@ export default async function ReportPage() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               <div className="p-4 bg-muted/50 rounded-lg text-center">
                 <p className="text-3xl font-mono font-bold text-foreground print:text-black">
-                  {data.metrics.projectsShipped}
+                  {data.metrics.numberOfRelease}
                 </p>
                 <p className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
-                  Projects Shipped
+                  No. of Releases
                 </p>
               </div>
               <div className="p-4 bg-muted/50 rounded-lg text-center">
