@@ -386,7 +386,7 @@ export const BRAG_DATA: BragData = {
       icon: '⚡',
       description:
         'Understanding and practical expertise in applying agentic AI to real-world challenges',
-      color: '#ffffff',
+      color: 'var(--secondary)',
       earnedOn: '2026-02',
       imageWidth: 100,
       imageHeight: 100,
@@ -400,7 +400,7 @@ export const BRAG_DATA: BragData = {
       icon: '🌱',
       description:
         'Fundamental understanding of IT services and their uses in the AWS Cloud',
-      color: '#ffffff',
+      color: 'var(--secondary)',
       earnedOn: '2025-10',
       imageWidth: 100,
       imageHeight: 100,
@@ -413,7 +413,7 @@ export const BRAG_DATA: BragData = {
       title: 'AWS Cloud Quest: Cloud Practitioner - Training Badge',
       icon: '♿',
       description: 'Demonstrated basic solution knowledge using AWS services',
-      color: '#ffffff',
+      color: 'var(--secondary)',
       earnedOn: '2025-07',
       imageWidth: 100,
       imageHeight: 100,
@@ -428,7 +428,7 @@ export const BRAG_DATA: BragData = {
       icon: '🏅',
       description:
         'Understanding the application of green software principles to the design and development of software applications',
-      color: '#ffffff',
+      color: 'var(--secondary)',
       earnedOn: '2024-07',
       imageWidth: 100,
       imageHeight: 100,

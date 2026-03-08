@@ -31,9 +31,7 @@ const STATUS_CONFIG = {
 } as const;
 
 export function CertCard({ cert }: CertCardProps) {
-  const status = cert.registered
-    ? 'exam-registered'
-    : computeCertStatus(cert.expiresOn);
+  const status = computeCertStatus(cert.expiresOn, cert.registered ?? false);
   const config = STATUS_CONFIG[status];
 
   return (
