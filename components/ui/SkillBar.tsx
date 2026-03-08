@@ -31,15 +31,30 @@ export function SkillBar({ skill }: SkillBarProps) {
         <span className="text-sm font-medium text-foreground">
           {skill.name}
         </span>
-        <span className="text-xs font-mono text-muted-foreground">
-          {skill.level}%
+        <span className="text-sm font-mono text-muted-foreground">
+          {skill.level}/5
         </span>
       </div>
-      <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
-        <div
-          className="h-full rounded-full bg-primary transition-all duration-700 ease-out"
-          style={{ width: filled ? `${skill.level}%` : '0%' }}
-        />
+      <div className="flex gap-1">
+        {[1, 2, 3, 4, 5].map((star) => (
+          <svg
+            key={star}
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill={filled && star <= skill.level ? 'currentColor' : 'none'}
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`h-4 w-4 transition-colors duration-700 ${
+              filled && star <= skill.level
+                ? 'text-primary'
+                : 'text-muted-foreground/20'
+            }`}
+          >
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+          </svg>
+        ))}
       </div>
     </div>
   );
