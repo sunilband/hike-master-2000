@@ -112,8 +112,7 @@ export interface MiscItem {
 
 export interface ProfileMetrics {
   numberOfRelease: number | string;
-  prsReviewed: number | string;
-  prsMerged: number | string;
+  highImpactWork: number | string;
   techDiscussions: number | string;
 }
 
@@ -141,9 +140,8 @@ export const BRAG_DATA: BragData = {
   years: ['2026', '2025', '2024'],
   metrics: {
     numberOfRelease: 5,
-    prsReviewed: 134,
-    prsMerged: 89,
-    techDiscussions: 28,
+    highImpactWork: 8,
+    techDiscussions: 2,
   },
   achievements: [
     {
