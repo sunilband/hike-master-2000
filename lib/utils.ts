@@ -28,7 +28,9 @@ export function formatMonth(date: string): string {
 
 export function computeCertStatus(
   expiresOn: string | null | undefined,
-): 'valid' | 'expiring-soon' | 'expired' | 'no-expiry' {
+  registered?: boolean,
+): 'valid' | 'expiring-soon' | 'expired' | 'no-expiry' | 'exam-registered' {
+  if (registered) return 'exam-registered';
   if (!expiresOn) return 'no-expiry';
   const expiry = new Date(`${expiresOn}-01`);
   const now = new Date();

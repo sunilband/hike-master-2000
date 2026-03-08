@@ -24,10 +24,14 @@ const STATUS_CONFIG = {
     label: 'No Expiry',
     className: 'bg-muted text-muted-foreground border-border',
   },
+  'exam-registered': {
+    label: 'Exam Registered',
+    className: 'bg-muted text-muted-foreground border-border',
+  },
 } as const;
 
 export function CertCard({ cert }: CertCardProps) {
-  const status = computeCertStatus(cert.expiresOn);
+  const status = computeCertStatus(cert.expiresOn, cert.registered ?? false);
   const config = STATUS_CONFIG[status];
 
   return (

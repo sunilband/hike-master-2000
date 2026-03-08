@@ -93,6 +93,7 @@ export interface Certification {
   expiresOn?: string | null;
   credentialUrl?: string;
   icon?: string;
+  registered?: boolean;
 }
 
 export interface MiscItem {
@@ -129,11 +130,11 @@ export interface BragData {
 }
 
 export const BRAG_DATA: BragData = {
-  name: 'John Doe',
-  role: 'Software Engineer',
-  team: 'Growth Platform',
-  period: 'Jan 2024 – Dec 2024',
-  years: ['2024', '2023'],
+  name: 'Anagha Yawale',
+  role: 'Packaged App Development Associate',
+  team: 'Supplier Platform-Sustainability',
+  period: 'July 2024 – Current',
+  years: ['2026', '2025', '2024'],
   metrics: {
     projectsShipped: 12,
     prsReviewed: 134,
@@ -381,87 +382,92 @@ export const BRAG_DATA: BragData = {
   badges: [
     {
       id: 'b1',
-      title: 'Performance Wizard',
+      title: 'Reinvention with Agentic AI',
       icon: '⚡',
-      description: 'Achieved 40%+ performance improvement',
-      color: 'var(--primary)',
-      earnedOn: '2024-02',
-      imageUrl:
-        'https://img.shields.io/badge/Performance-Wizard-gold?style=for-the-badge&logo=lightning&logoColor=white',
-      viewUrl: 'https://example.com/badges/performance-wizard',
+      description:
+        'Understanding and practical expertise in applying agentic AI to real-world challenges',
+      color: 'var(--secondary)',
+      earnedOn: '2026-02',
+      imageWidth: 100,
+      imageHeight: 100,
+      imageUrl: 'anagha/badges/anagha-reinvention-with-agentic-ai-badge.png',
+      viewUrl:
+        'https://www.credly.com/badges/1aee6038-39d5-43bb-92d1-a97f4512968f/public_url',
     },
     {
       id: 'b2',
-      title: 'Team Multiplier',
+      title: 'AWS Certified Cloud Practitioner',
       icon: '🌱',
-      description: 'Unblocked 3+ teams simultaneously',
-      color: 'var(--chart-2)',
-      earnedOn: '2024-04',
-      imageUrl:
-        'https://img.shields.io/badge/Team-Multiplier-green?style=for-the-badge&logo=github&logoColor=white',
-      viewUrl: 'https://example.com/badges/team-multiplier',
+      description:
+        'Fundamental understanding of IT services and their uses in the AWS Cloud',
+      color: 'var(--secondary)',
+      earnedOn: '2025-10',
+      imageWidth: 100,
+      imageHeight: 100,
+      imageUrl: 'anagha/badges/anagha-aws-cloud-practioner-badge.png',
+      viewUrl:
+        'https://www.credly.com/badges/5d62f167-5c3b-4a52-8869-99cb7acb4e2d/public_url',
     },
     {
       id: 'b3',
-      title: 'Zero Bug Ship',
-      icon: '🎯',
-      description: 'Launched a project with zero P0 bugs',
-      color: 'var(--chart-3)',
-      earnedOn: '2024-10',
+      title: 'AWS Cloud Quest: Cloud Practitioner - Training Badge',
+      icon: '♿',
+      description: 'Demonstrated basic solution knowledge using AWS services',
+      color: 'var(--secondary)',
+      earnedOn: '2025-07',
+      imageWidth: 100,
+      imageHeight: 100,
       imageUrl:
-        'https://img.shields.io/badge/Zero-Bug%20Ship-blue?style=for-the-badge&logo=checkmarx&logoColor=white',
-      viewUrl: 'https://example.com/badges/zero-bug-ship',
+        'anagha/badges/anagha-aws-cloud-quest-cloud-practitioner-badge.png',
+      viewUrl:
+        'https://www.credly.com/badges/d014d4a0-1e27-4474-83ef-0471b7509090/public_url',
     },
     {
       id: 'b4',
-      title: 'Accessibility Champion',
-      icon: '♿',
-      description: 'Achieved full WCAG AA compliance',
-      color: 'var(--chart-4)',
-      earnedOn: '2024-06',
-      imageUrl:
-        'https://img.shields.io/badge/Accessibility-Champion-purple?style=for-the-badge&logo=accessibility&logoColor=white',
-      viewUrl: 'https://example.com/badges/accessibility-champion',
-    },
-    {
-      id: 'b5',
-      title: 'Mentor of the Cycle',
+      title: 'LFC131: Green Software for Practitioners',
       icon: '🏅',
-      description: 'Mentored 2 engineers to promotion',
-      color: 'var(--chart-5)',
-      earnedOn: '2024-08',
+      description:
+        'Understanding the application of green software principles to the design and development of software applications',
+      color: 'var(--secondary)',
+      earnedOn: '2024-07',
+      imageWidth: 100,
+      imageHeight: 100,
       imageUrl:
-        'https://img.shields.io/badge/Mentor-of%20the%20Cycle-orange?style=for-the-badge&logo=opsgenie&logoColor=white',
-      viewUrl: 'https://example.com/badges/mentor-cycle',
+        'anagha/badges/anagha-lfc131-green-software-for-practitioners-badge.png',
+      viewUrl:
+        'https://www.credly.com/badges/c8fb38d8-50c5-4c15-a464-8c0035585b0c/public_url',
     },
   ],
   certifications: [
     {
       id: 'c1',
-      title: 'AWS Solutions Architect – Associate',
-      issuer: 'Amazon Web Services',
-      issuedOn: '2024-03',
-      expiresOn: '2027-03',
-      credentialUrl: 'https://aws.amazon.com/certification',
-      icon: '☁️',
-    },
-    {
-      id: 'c2',
-      title: 'Professional Scrum Master I',
-      issuer: 'Scrum.org',
-      issuedOn: '2023-11',
-      expiresOn: null,
-      credentialUrl: '',
+      title: 'Microsoft Github Copilot',
+      issuer: 'Microsoft',
+      issuedOn: '2025-11',
+      expiresOn: '2027-11',
+      credentialUrl:
+        'https://learn.microsoft.com/en-in/users/anaghayawale-3755/credentials/3da0fbed9c509340',
       icon: '🔄',
     },
     {
+      id: 'c2',
+      title: 'AWS Certified Cloud Practitioner',
+      issuer: 'Amazon Web Services',
+      issuedOn: '2025-10',
+      expiresOn: '2028-10',
+      credentialUrl:
+        'https://cp.certmetrics.com/amazon/en/public/verify/credential/c81e52b62b7243389613576570744811',
+      icon: '☁️',
+    },
+    {
       id: 'c3',
-      title: 'Google UX Design Certificate',
-      issuer: 'Google / Coursera',
-      issuedOn: '2024-07',
-      expiresOn: null,
-      credentialUrl: 'https://coursera.org',
-      icon: '🎨',
+      title: 'AWS App Developer Associate',
+      issuer: 'Amazon Web Services',
+      issuedOn: '',
+      expiresOn: '',
+      credentialUrl: '',
+      registered: true,
+      icon: '☁️',
     },
   ],
   misc: [
